@@ -2,14 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>Repositoo</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Mohammad Tarem</Authors>
+    <Company>SharkSoft</Company>
+    <Title>Repositoo</Title>
+    <Description>This library implements Repository pattern.</Description>
+    <RepositoryUrl>https://github.com/MohammadTarem/Repositoo</RepositoryUrl>
+    <RespositoryType>git</RespositoryType>
+    <PackageProjectUrl>https://github.com/MohammadTarem/Repositoo</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.Abstractions" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="MongoDB.Driver" />
-    <None Remove="CouchDB.NET" />
-    <None Remove="CassandraCSharpDriver" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.12" />
