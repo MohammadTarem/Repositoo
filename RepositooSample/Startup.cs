@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization;
+using Repositoo;
 
 namespace RepositooSample
 {
@@ -37,10 +38,18 @@ namespace RepositooSample
             });
 
             // For MongoDB
-            //var s = Configuration.GetConnectionString("MongoDb");
-            //services.AddSingleton<IMongoClient>(new MongoClient(Configuration.GetConnectionString("MongoDb")));
+            services.AddSingleton<IMongoClient>(new MongoClient(Configuration.GetConnectionString("MongoDb")));
 
-            
+
+            // For InMemory
+            services.AddSingleton<OrderWithInMemoryRepository>
+            (
+                (s) => new OrderWithInMemoryRepository
+                    (
+                        new InMemoryOperations<int, Order>(o => o.Id)
+                    )
+            );
+
 
             BsonClassMap.RegisterClassMap<Order>(o =>
             {
@@ -57,7 +66,7 @@ namespace RepositooSample
             // Create database
 
             // For sql db
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
             // For mongo db
             //db.DropDatabase("Orders");
