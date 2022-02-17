@@ -4,7 +4,7 @@ This library implements the Repository pattern. It uses bridge pattern to sepera
 
 The core interface is IDatabaseOperations<Id, TEntity> . It abstracts add, update and remove operations. The interface is drived from  IQueryable<TEntity> to enable efficient querying infrastructure.
 
-Curently two implemetations has been added. One for SQL Server and the other for MongoDb.
+Curently three implemetations has been added. One for SQL Server, one for MongoDb and the other for in memory repository.
 
 
 ## Aggrigate Root
@@ -46,6 +46,15 @@ public class OrderMongoRepository : BaseRepository<int, Order>
 repository = new OrderMongoRepository
 (
     new MongoDbOperations<int, Order>( client , "Orders", o => o.Id)
+
+    
+// For InMemory
+services.AddSingleton<OrderWithInMemoryRepository>
+(
+    (s) => new OrderWithInMemoryRepository
+        (
+            new InMemoryOperations<int, Order>(o => o.Id)
+        )
 );
 
 
